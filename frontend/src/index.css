@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+    background-color: #101010;
+    /* background-color: whitesmoke; */
+    color: whitesmoke;
+}
+
+
+table,tr,td{
+    border-color: white !important;
+}
