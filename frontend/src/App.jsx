@@ -6,10 +6,10 @@ import "react-toastify/dist/ReactToastify.css";
 function App() {
   return (
     <>
-      <ToastContainer/>
-      <Navigation/>
+      <ToastContainer />
+      <Navigation />
       <main className="py-3">
-        <Outlet/>
+        <Outlet />
       </main>
     </>
   );

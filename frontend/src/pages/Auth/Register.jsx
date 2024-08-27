@@ -129,8 +129,12 @@ const Register = () => {
         </form>
         <div className="mt-4">
           <p className="text-white">
-            Already have an account ?{" "}
-            <Link to={"/login"} className="text-pink-500 hover:underline">
+            Already have an account ? 
+            {console.log(redirect)}
+            <Link
+              to={redirect ? `/login?redirect=${redirect}` : "/login"}
+              className="text-pink-500 hover:underline"
+            >
               Login
             </Link>
           </p>

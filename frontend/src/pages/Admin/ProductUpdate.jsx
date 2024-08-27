@@ -72,12 +72,14 @@ const ProductUpdate = () => {
       formData.append("quantity", quantity);
       formData.append("brand", brand);
       formData.append("countInStock", stock);
+      // console.log(formData);
+
       const { data } = await updateProduct({ productId: params._id, formData });
 
       if (data.error) {
         toast.error(data.error);
       } else {
-        console.log(data);
+        // console.log(data);
 
         toast.success(`${data.name} successfully updated`);
         navigate("/admin/allproductslist");
@@ -194,7 +196,7 @@ const ProductUpdate = () => {
                 <label htmlFor="name block">Count In Stock</label>
                 <br />
                 <input
-                  type="text"
+                  type="Number"
                   className="p-4 mb-3 w-[30rem] border rounded-lg bg-[#101011] text-white"
                   value={stock}
                   onChange={(e) => setStock(e.target.value)}

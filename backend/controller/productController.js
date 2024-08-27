@@ -33,7 +33,15 @@ const addProduct = async (req, res) => {
 
 const updateProductDetails = async (req, res) => {
   try {
-    const { name, description, price, category, quantity, brand } = req.fields;
+    const {
+      name,
+      description,
+      price,
+      category,
+      quantity,
+      brand,
+      countInStock,
+    } = req.fields;
 
     // Validation
     switch (true) {
@@ -58,6 +66,8 @@ const updateProductDetails = async (req, res) => {
     );
 
     await product.save();
+    // console.log(product);
+
     res.json(product);
   } catch (error) {
     console.log(error);
@@ -179,7 +189,10 @@ const addProductReview = async (req, res) => {
 
 const fetchTopProducts = async (req, res) => {
   try {
-    const product = await Product.find({}).sort({ rating: -1 }).sort({price: -1}).limit(4);
+    const product = await Product.find({})
+      .sort({ rating: -1 })
+      .sort({ price: -1 })
+      .limit(4);
     res.json(product);
   } catch (error) {
     console.log(error);

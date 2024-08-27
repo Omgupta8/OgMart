@@ -12,7 +12,7 @@ import {
 import { Provider } from "react-redux";
 import store from "./redux/features/store.js";
 
-import Home from "./Home.jsx";
+import Home from "./pages/Home.jsx";
 
 // Private Route
 import PrivateRoute from "./components/PrivateRoute.jsx";
@@ -21,6 +21,9 @@ import PrivateRoute from "./components/PrivateRoute.jsx";
 import Login from "./pages/Auth/Login.jsx";
 import Register from "./pages/Auth/Register.jsx";
 import Profile from "./pages/User/Profile.jsx";
+import Favorite from "./pages/Products/Favorites.jsx";
+import ProductDetails from "./pages/Products/ProductDetails.jsx";
+import Cart from "./pages/Cart.jsx";
 
 //Admin
 import AdminRoutes from "./pages/Admin/AdminRoute.jsx";
@@ -47,6 +50,18 @@ const router = createBrowserRouter([
         index: true,
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/favorite",
+        element: <Favorite />,
+      },
+      {
+        path: "/product/:id",
+        element: <ProductDetails />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
       // Admin Routes
       {

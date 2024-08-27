@@ -8,7 +8,7 @@ import Loader from "../../components/Loader";
 const AllProducts = () => {
   const { data: products, isLoading, isError } = useAllProductsQuery();
 
-  console.log(products);
+  // console.log(products);
 
   if (isLoading) {
     return <Loader />;

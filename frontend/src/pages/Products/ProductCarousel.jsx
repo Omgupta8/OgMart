@@ -17,7 +17,7 @@ import Loader from "../../components/Loader";
 const ProductCarousel = () => {
   const { data: products, isLoading, error } = useGetTopProductsQuery();
 
-  console.log(products);
+  // console.log(products);
 
   //   if (isLoading) {
   //     <Loader />;
