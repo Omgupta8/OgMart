@@ -24,6 +24,7 @@ import Profile from "./pages/User/Profile.jsx";
 import Favorite from "./pages/Products/Favorites.jsx";
 import ProductDetails from "./pages/Products/ProductDetails.jsx";
 import Cart from "./pages/Cart.jsx";
+import Shop from "./pages/Shop.jsx";
 
 //Admin
 import AdminRoutes from "./pages/Admin/AdminRoute.jsx";
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart />,
+      },
+      {
+        path: "/shop",
+        element: <Shop />,
       },
       // Admin Routes
       {
