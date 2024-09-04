@@ -33,6 +33,14 @@ import CategoryList from "./pages/Admin/CategoryList.jsx";
 import ProductList from "./pages/Admin/ProductList.jsx";
 import ProductUpdate from "./pages/Admin/ProductUpdate.jsx";
 import AllProducts from "./pages/Admin/AllProducts.jsx";
+import Shipping from "./pages/Orders/Shipping.jsx";
+import PlaceOrder from "./pages/Orders/PlaceOrder.jsx";
+
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import Order from "./pages/Orders/Order.jsx";
+import UserOrders from "./pages/User/UserOrders.jsx";
+import OrderList from "./pages/Admin/OrderList.jsx";
+import AdminDashboard from "./pages/Admin/AdminDashboard.jsx";
 
 const router = createBrowserRouter([
   {
@@ -68,11 +76,20 @@ const router = createBrowserRouter([
         path: "/shop",
         element: <Shop />,
       },
+      {
+        path: "/user-orders",
+        element: <UserOrders />,
+      },
       // Admin Routes
       {
         path: "",
         element: <PrivateRoute />,
-        children: [{ path: "profile", element: <Profile /> }],
+        children: [
+          { path: "profile", element: <Profile /> },
+          { path: "shipping", element: <Shipping /> },
+          { path: "placeorder", element: <PlaceOrder /> },
+          { path: "order/:id", element: <Order /> },
+        ],
       },
       {
         path: "/admin",
@@ -83,6 +100,8 @@ const router = createBrowserRouter([
           { path: "productlist", element: <ProductList /> },
           { path: "allproductslist", element: <AllProducts /> },
           { path: "product/update/:_id", element: <ProductUpdate /> },
+          { path: "orderlist", element: <OrderList /> },
+          { path: "dashboard", element: <AdminDashboard /> },
         ],
       },
     ],
@@ -92,6 +111,8 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <App />
   <Provider store={store}>
-    <RouterProvider router={router} />
+    <PayPalScriptProvider>
+      <RouterProvider router={router} />
+    </PayPalScriptProvider>
   </Provider>
 );

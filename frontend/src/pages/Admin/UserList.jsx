@@ -27,7 +27,7 @@ const UserList = () => {
   const deleteHandler = async (id) => {
     if (window.confirm("Are you sure?")) {
       try {
-        console.log(id);
+        // console.log(id);
 
         await deleteUser(id);
         toast.success("User Profile Deleted!");

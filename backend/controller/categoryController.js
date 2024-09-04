@@ -4,7 +4,7 @@ import Category from "../models/categoryModel.js";
 const createCategory = async (req, res) => {
   try {
     const { name } = req.body;
-    console.log(name);
+    // console.log(name);
     if (!name) {
       return res.json({
         error: "Name is required",
@@ -49,7 +49,7 @@ const updateCategory = async (req, res) => {
 
 const removeCategory = async (req, res) => {
   try {
-    console.log(req.params);
+    // console.log(req.params);
 
     const removed = await Category.findByIdAndDelete(req.params.categoryId);
 

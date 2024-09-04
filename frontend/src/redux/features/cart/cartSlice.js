@@ -20,12 +20,13 @@ const cartSlice = createSlice({
       } else {
         state.cartItems = [...state.cartItems, item];
       }
-      return updateCart(state, item);
+      updateCart(state, item);
+      // console.log(state);
     },
 
     removeFromCart: (state, action) => {
       state.cartItems = state.cartItems.filter((x) => x._id !== action.payload);
-      return updateCart(state);
+      updateCart(state);
     },
 
     saveShippingAddress: (state, action) => {

@@ -15,6 +15,7 @@ import { GETUPLOAD_URL } from "../../redux/features/constants";
 const ProductUpdate = () => {
   const params = useParams();
   const { data: productData } = useGetProductByIdQuery(params._id);
+  // console.log(productData);
 
   const [image, setImage] = useState(productData?.image || "");
   const [name, setName] = useState(productData?.name || "");
@@ -43,6 +44,7 @@ const ProductUpdate = () => {
       setQuantity(productData.quantity);
       setBrand(productData.brand);
       setImage(productData.image);
+      setStock(productData.countInStock);
     }
   }, [productData]);
 
@@ -75,6 +77,7 @@ const ProductUpdate = () => {
       // console.log(formData);
 
       const { data } = await updateProduct({ productId: params._id, formData });
+      // console.log(data);
 
       if (data.error) {
         toast.error(data.error);
@@ -106,7 +109,7 @@ const ProductUpdate = () => {
     }
   };
   return (
-    <div className="container  lg:ml-[9rem] lg:w-auto sm:mx-[0] ">
+    <div className="container  lg:ml-[9rem] lg:w-auto sm:mx-[0]">
       <div className="flex flex-col md:flex-row">
         <AdminMenu />
         <div className="md:w-3/4 p-3">

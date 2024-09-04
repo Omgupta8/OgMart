@@ -130,7 +130,7 @@ const Register = () => {
         <div className="mt-4">
           <p className="text-white">
             Already have an account ? 
-            {console.log(redirect)}
+            {/* {console.log(redirect)} */}
             <Link
               to={redirect ? `/login?redirect=${redirect}` : "/login"}
               className="text-pink-500 hover:underline"
