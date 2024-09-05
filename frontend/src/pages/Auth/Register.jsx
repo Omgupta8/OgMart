@@ -12,6 +12,8 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [confirmShowPassword, setConfirmShowPassword] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -43,10 +45,18 @@ const Register = () => {
         navigate(redirect);
         toast.success("User successfully registered");
       } catch (err) {
-        console.log(err);
+        // console.log(err);
         toast.error(err?.data || err.message);
       }
     }
+  };
+
+  const togglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleConfirmPassword = () => {
+    setConfirmShowPassword(!confirmShowPassword);
   };
   return (
     <section className="pl-[10rem] flex flex-wrap">
@@ -94,11 +104,14 @@ const Register = () => {
               Password
             </label>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="password"
+              minLength="2"
               className="mt-1 p-2 border rounded w-full bg-neutral-900"
               placeholder="Enter password"
               value={password}
+              onFocus={togglePassword}
+              onBlur={togglePassword}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
@@ -110,11 +123,13 @@ const Register = () => {
               Confirm Password
             </label>
             <input
-              type="password"
+              type={confirmShowPassword ? "text" : "password"}
               id="confirmPassword"
               className="mt-1 p-2 border rounded w-full bg-neutral-900"
               placeholder="Confirm Password"
               value={confirmPassword}
+              onFocus={toggleConfirmPassword}
+              onBlur={toggleConfirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </div>
@@ -129,8 +144,7 @@ const Register = () => {
         </form>
         <div className="mt-4">
           <p className="text-white">
-            Already have an account ? 
-            {/* {console.log(redirect)} */}
+            Already have an account ?{/* {console.log(redirect)} */}
             <Link
               to={redirect ? `/login?redirect=${redirect}` : "/login"}
               className="text-pink-500 hover:underline"

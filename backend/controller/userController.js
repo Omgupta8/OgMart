@@ -14,7 +14,7 @@ const createUser = async (req, res) => {
     }
 
     const userExists = await User.findOne({ email });
-    if (userExists) res.status(400).json("User Already exists");
+    if (userExists) return res.status(400).json("User Already exists");
 
     // bcrypt
     const salt = await bcrypt.genSalt(10);
@@ -36,7 +36,7 @@ const createUser = async (req, res) => {
       res.status(400).json("Invalid user data");
     }
   } catch (err) {
-    console.log(err);
+    // console.log(err); 
     return res.status(400).json(err);
   }
 };
