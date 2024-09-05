@@ -25,12 +25,12 @@ const AllProducts = () => {
           <div className="ml-[2rem] text-4xl m-4 font-bold h-12">
             All Product ({products.data.length})
           </div>
-          <div className="grid grid-cols-2">
+          <div className="grid grid-cols-2 xl:w-[90rem] lg:w-[70rem] sm:w-[60rem]">
             {products?.data.map((product) => (
               <Link
                 key={product._id}
                 to={`/admin/product/update/${product._id}`}
-                className="block mb-4 overflow-hidden "
+                className="mb-4 "
               >
                 <div className="flex">
                   <img
@@ -44,7 +44,7 @@ const AllProducts = () => {
                         {product?.name}
                       </h5>
                       <p className="text-gray-400 text-sm">
-                        {moment(product.createdAt).format("MMMM Do YYYY")}
+                        {moment(product.createdAt).format("MMMM DD YYYY")}
                       </p>
                     </div>
 
