@@ -5,35 +5,39 @@ import generateToken from "../utils/createToken.js";
 
 const createUser = async (req, res) => {
   // console.log(req.body);
-  const { username, email, password } = req.body;
-  // console.log(username, email, password);
-
-  if (!username || !email || !password) {
-    throw new Error("Please fill the necessary inputs");
-  }
-
-  const userExists = await User.findOne({ email });
-  if (userExists) res.status(400).json("User Already exists");
-
-  // bcrypt
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(password, salt);
-
-  const newUser = new User({ username, email, password: hashedPassword });
-
   try {
-    await newUser.save();
-    generateToken(res, newUser._id);
+    const { username, email, password } = req.body;
+    // console.log(username, email, password);
 
-    res.status(201).json({
-      // _id: newUser._id,
-      // username: newUser.username,
-      message: "User created",
-      data: newUser,
-    });
-  } catch (error) {
-    res.status(400);
-    throw new Error("Invalid user data");
+    if (!username || !email || !password) {
+      return res.status(404).json("Please fill the necessary inputs");
+    }
+
+    const userExists = await User.findOne({ email });
+    if (userExists) res.status(400).json("User Already exists");
+
+    // bcrypt
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    const newUser = new User({ username, email, password: hashedPassword });
+
+    try {
+      await newUser.save();
+      generateToken(res, newUser._id);
+
+      res.status(201).json({
+        // _id: newUser._id,
+        // username: newUser.username,
+        message: "User created",
+        data: newUser,
+      });
+    } catch (error) {
+      res.status(400).json("Invalid user data");
+    }
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json(err);
   }
 };
 
@@ -95,23 +99,33 @@ const getCurrentUserProfile = async (req, res) => {
 
 const updateCurrentUserProfile = async (req, res) => {
   const user = await User.findById(req.user._id);
-  if (user) {
-    user.username = req.body.username || user.username;
-    user.email = req.body.email || user.email;
-    if (req.body.password) {
-      const salt = await bcrypt.genSalt(10);
-      const hashedPassword = await bcrypt.hash(req.body.password, salt);
-      user.password = hashedPassword;
-    }
-    const updatedUser = await user.save();
+  try {
+    if (user) {
+      const userExists = await User.findOne({ email: req.body.email });
+      if (userExists && user.email != userExists.email) {
+        return res.status(400).json("User Already exists");
+      }
 
-    res.json({
-      message: "Updated data",
-      data: updatedUser,
-    });
-  } else {
-    res.status(404);
-    throw new Error("User not found");
+      user.username = req.body.username || user.username;
+      user.email = req.body.email || user.email;
+      if (req.body.password) {
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(req.body.password, salt);
+        user.password = hashedPassword;
+      }
+      const updatedUser = await user.save();
+
+      res.json({
+        message: "Updated data",
+        data: updatedUser,
+      });
+    } else {
+      res.status(404);
+      throw new Error("User not found");
+    }
+  } catch (err) {
+    // console.log(err);
+    res.status(400).json(err);
   }
 };
 

@@ -38,11 +38,14 @@ const Profile = () => {
           email,
           password,
         }).unwrap();
+        // console.log(res);
+        
 
         dispatch(setCredentials({ ...res }));
         toast.success("Profile Updated Successfully");
       } catch (error) {
-        toast.error(error?.data.message || error.message);
+        // console.log(error);
+        toast.error(error?.data || error.message);
       }
     }
   };
