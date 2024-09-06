@@ -1,5 +1,8 @@
 {
   "name": "e-commerce",
+  "engines": {
+    "node": "18.17.1"
+  },
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
