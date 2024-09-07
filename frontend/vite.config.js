@@ -6,8 +6,8 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      "/api/": "https://ogmart.onrender.com/",
-      "/uploads/": "https://ogmart.onrender.com/",
+      "/api/": "https://ogmart-backend.onrender.com/",
+      "/uploads/": "https://ogmart-backend.onrender.com/",
     },
   },
 });
