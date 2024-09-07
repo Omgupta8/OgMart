@@ -6,8 +6,8 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      "/api/": "https://ogmart.netlify.app",
-      "/uploads/": "https://ogmart.netlify.app",
+      "/api/": "https://ogmart.onrender.com/",
+      "/uploads/": "https://ogmart.onrender.com/",
     },
   },
 });
